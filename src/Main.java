@@ -3,9 +3,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main implements ASCII_hangman {
 
@@ -25,14 +23,35 @@ public class Main implements ASCII_hangman {
     }
 
         public static void main(String[] args) {
+        hangman();
+        }
 
+        private static void rematchFunc(){
+            System.out.println("would you like to rematch? type yes/no");
+            String rematch = "yes";
+            String Rinput = new Scanner(System.in).next();
+            if (Rinput.matches(rematch)){
+                hangman();
+            }else {
+                System.exit(0);}
+        };
+
+        private static void hangman(){
             String path = new File("").getAbsolutePath() + "/src/Hangman_words";
             String RandomWord = GetRandomWord(path);
+            List<String> wordCharacters = List.of(RandomWord.split(""));
 
-            String encrypted = RandomWord.replaceAll("[a-zA-Z]", "_");
+            for (String Word : wordCharacters){
+                RandomWord.split("[a-zA-Z]" );
+            }
+
+            List<String> encrypted = new ArrayList<>();
+            for (String letter : wordCharacters ){
+                encrypted.add("_");
+            }
+
             System.out.println("Enter a character to save the hangman!\n");
 
-            char[] wordCharacters = RandomWord.toCharArray();
 
             while (Mistake_counter < 6) {
 
@@ -42,19 +61,25 @@ public class Main implements ASCII_hangman {
 
                 boolean checker = false;
 
-                for (char letter : wordCharacters) {
-                    if (input.matches(String.valueOf(letter))) {
+                for (String letter : wordCharacters) {
+                    if (input.matches(letter)) {
                         System.out.println("correct");
                         checker = true;
+                        encrypted.set(wordCharacters.indexOf(letter), letter);
                     }
                 }
                 if (!checker){
                     Mistake_counter += 1;
                     System.out.println("Incorrect letter");
                 }
+                if (encrypted.contains("_") == false){
+                    System.out.println("you have saved the hangman, pray it wasent captial punishment for horrendous crimes.");
+                    rematchFunc();
+                }
             }
             System.out.println(parts_6);
             System.out.println("you have lost, the poor hangman :(");
-            System.exit(0);
+            System.out.println("the word was " + RandomWord);
+            rematchFunc();
         }
     }
