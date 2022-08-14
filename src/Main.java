@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,31 +24,37 @@ public class Main implements ASCII_hangman {
 
     }
 
-    public static void main(String[] args) {
+        public static void main(String[] args) {
 
-        String path = new File("").getAbsolutePath() + "/src/Hangman_words";
-        String RandomWord = GetRandomWord(path);
+            String path = new File("").getAbsolutePath() + "/src/Hangman_words";
+            String RandomWord = GetRandomWord(path);
 
-        while (Mistake_counter < 6) {
+            String encrypted = RandomWord.replaceAll("[a-zA-Z]", "_");
+            System.out.println("Enter a character to save the hangman!\n");
 
-            System.out.println("Enter a character to save the hangman!\n" + Art[Mistake_counter] + "\n" + RandomWord.replaceAll("[a-zA-Z]", "_"));
-            String input = new Scanner(System.in).next();
+            char[] wordCharacters = RandomWord.toCharArray();
 
-            boolean checker = false;
+            while (Mistake_counter < 6) {
 
-            for (char letter : RandomWord.toCharArray()) {
-                if (input.matches(String.valueOf(letter))) {
-                    System.out.println("correct");
-                    checker = true;
+                System.out.println(Art[Mistake_counter]);
+                System.out.println(encrypted);
+                String input = new Scanner(System.in).next();
+
+                boolean checker = false;
+
+                for (char letter : wordCharacters) {
+                    if (input.matches(String.valueOf(letter))) {
+                        System.out.println("correct");
+                        checker = true;
+                    }
+                }
+                if (!checker){
+                    Mistake_counter += 1;
+                    System.out.println("Incorrect letter");
                 }
             }
-            if (!checker){
-                Mistake_counter += 1;
-                System.out.println("Incorrect letter");
-            }
-            if (Mistake_counter > 5) {
-                System.out.println("you have lost, the poor hangman :(");
-            }
+            System.out.println(parts_6);
+            System.out.println("you have lost, the poor hangman :(");
+            System.exit(0);
         }
     }
-}
