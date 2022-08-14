@@ -52,4 +52,9 @@ public interface ASCII_hangman {
             " / \\  |\n" +
             "      |\n" +
             "=========\n";
+
+    String[] Art = new String[]{parts_0,parts_1,parts_2,parts_3,parts_4,parts_5,parts_6};
+
 }
+
+
