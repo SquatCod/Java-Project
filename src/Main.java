@@ -50,7 +50,7 @@ public class Main extends wordReader implements ASCII_hangman {
                     System.out.println("Incorrect letter");
                 }
                 if (encrypted.contains("_") == false){
-                    System.out.println("you have saved the hangman, pray it wasent captial punishment for horrendous crimes.");
+                    System.out.println("you have saved the hangman, pray it wasn't capital punishment for horrendous crimes.");
                     rematchFunc();
                 }
             }
