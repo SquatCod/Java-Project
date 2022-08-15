@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class Main implements ASCII_hangman {
+public class Main extends wordReader implements ASCII_hangman {
 
     static int Mistake_counter = 0;
 
@@ -59,18 +59,7 @@ public class Main implements ASCII_hangman {
             System.out.println("the word was " + RandomWord);
             rematchFunc();
         }
-        private static String GetRandomWord(String path) {
-            List<String> lines;
-            try {
-                lines = Files.readAllLines(Paths.get(path));
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-            Random word = new Random();
-            return lines.get(word.nextInt(lines.size()));
 
-        }
         private static void rematchFunc(){
             System.out.println("would you like to rematch? type yes/no");
             String rematch = "yes";
