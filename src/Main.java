@@ -9,32 +9,9 @@ public class Main implements ASCII_hangman {
 
     static int Mistake_counter = 0;
 
-    private static String GetRandomWord(String path) {
-        List<String> lines;
-        try {
-            lines = Files.readAllLines(Paths.get(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        Random word = new Random();
-        return lines.get(word.nextInt(lines.size()));
-
-    }
-
         public static void main(String[] args) {
         hangman();
         }
-
-        private static void rematchFunc(){
-            System.out.println("would you like to rematch? type yes/no");
-            String rematch = "yes";
-            String Rinput = new Scanner(System.in).next();
-            if (Rinput.matches(rematch)){
-                hangman();
-            }else {
-                System.exit(0);}
-        };
 
         private static void hangman(){
             String path = new File("").getAbsolutePath() + "/src/Hangman_words";
@@ -82,4 +59,26 @@ public class Main implements ASCII_hangman {
             System.out.println("the word was " + RandomWord);
             rematchFunc();
         }
+        private static String GetRandomWord(String path) {
+            List<String> lines;
+            try {
+                lines = Files.readAllLines(Paths.get(path));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+            Random word = new Random();
+            return lines.get(word.nextInt(lines.size()));
+
+        }
+        private static void rematchFunc(){
+            System.out.println("would you like to rematch? type yes/no");
+            String rematch = "yes";
+            String Rinput = new Scanner(System.in).next();
+            if (Rinput.matches(rematch)){
+                Mistake_counter = 0;
+                hangman();
+            }else {
+                System.exit(0);}
+        };
     }
